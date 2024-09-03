@@ -26,6 +26,10 @@ finally:
 def index():
     return render_template('index.html', countries=countries)
 
+@app.route('/ptfy')
+def portfolio():
+    return render_template('portfolio.html', countries=countries)
+
 
 @app.route('/visited')
 def visited():
