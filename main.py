@@ -23,6 +23,11 @@ def index():
     countries = get_countries()
     return render_template('index.html', countries=countries)
 
+@app.route('/about')
+def about_me():
+    countries = get_countries()
+    return render_template('about.html', countries=countries)
+
 @app.route('/ptfy')
 def portfolio():
     countries = get_countries()
