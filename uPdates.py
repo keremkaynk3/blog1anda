@@ -1,6 +1,5 @@
 import sqlite3 as sql
 
-
 # SQLite veritabanı bağlantısı
 db = sql.connect(r"C:/Users/MR. CAPH/PycharmProjects/blogBiranda/blog.db")
 cursor = db.cursor()
@@ -8,25 +7,25 @@ cursor = db.cursor()
 # Fotoğraf verisi
 class uPdates():
     def add_Photo(self):
-        photo_info = input("Yüklemek istediğiniz dosyanın ismini giriniz:")
-        c = input("Yüklemek istediğiniz dosya hangi ülkeye ait?")
+        photo_info = input("Enter a location that photo you want to add...")
+        c = input("Which country does it belong that you want to add?")
         with open(f'{photo_info}', 'rb') as file:
             foto_bytes = file.read()
-        cursor.execute("UPDATE ulkeler SET fotolar=? WHERE ulke_adi=?", (foto_bytes, f"{c}"))
+        cursor.execute("UPDATE Countries SET images=? WHERE country_name=?", (foto_bytes, f"{c}"))
         db.commit()
-        print("Fotoğraf veritabanına eklendi...")
+        print("Photo added succesfully!")
 
     def add_Country(self):
-        print("Eklemek istediğiniz ülkenin verilerini doğru ve eksiksiz tuşlayınız:")
-        a = input("Ülke ismi:")
-        b = input("Youtube Linki:")
+        print("Enter that informations carefully about country that you want to add")
+        a = input("Country Name:")
+        b = input("Video Link (If not exist press 'ENTER' :")
         c = input("Başkenti:")
         d = input("Ülke Kodu")
         e = input("Ülke Nüfusu")
         f = input("Para Birimi:")
         g = input("Şehir Bilgisi:")
         h = 0
-        sorgu = "INSERT INTO ulkeler(ulke_adi, linkler, baskent, kodu, nufus, para_birimi, yerler, fotolar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+        sorgu = "INSERT INTO Countries(country_name, links, capital, country_code, population, currency, cities, images) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
         cursor.execute(sorgu, (a, b, c, d, e, f, g, h))
         db.commit()
         print("Ülke bilgisi veritabanına eklendi...")

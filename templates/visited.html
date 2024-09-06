@@ -59,7 +59,7 @@
             max-width: 1200px; /* Optional: to control the maximum width */
         }
         .country-item {
-            flex: 1 1 calc(50% - 20px); /* Two items per row with space in between */
+            /* flex: 1 1 calc(50% - 20px);  Two items per row with space in between */
             text-align: center;
             background-color: #fff;
             padding: 20px;
@@ -121,7 +121,7 @@
     function getRandomColor() {
         const letters = '0123456789ABCDEF';
         let color = '#';
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 4; i++) {
             color += letters[Math.floor(Math.random() * 16)];
         }
         return color;

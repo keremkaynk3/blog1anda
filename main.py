@@ -1,14 +1,12 @@
 import sqlite3 as sql
 from flask import Flask, render_template, Response
-import io
-
 app = Flask(__name__)
 
 def get_countries():
     try:
         db = sql.connect(r"C:/Users/MR. CAPH/PycharmProjects/blogBiranda/blog.db")
         cursor = db.cursor()
-        cursor.execute("SELECT ulke_adi, linkler, baskent, kodu, nufus, para_birimi, yerler, fotolar FROM ulkeler")
+        cursor.execute("SELECT country_name, links, capital, country_code, population, currency, cities, images FROM Countries")
         countries = cursor.fetchall()
     except sql.Error as e:
         print(f"Veritabanı hatası: {e}")
@@ -25,13 +23,11 @@ def index():
 
 @app.route('/about')
 def about_me():
-    countries = get_countries()
-    return render_template('about.html', countries=countries)
+    return render_template('about.html')
 
 @app.route('/ptfy')
 def portfolio():
-    countries = get_countries()
-    return render_template('portfolio.html', countries=countries)
+    return render_template('portfolio.html')
 
 @app.route('/visited')
 def visited():
@@ -51,7 +47,7 @@ def image(country_id):
     try:
         db = sql.connect(r"C:/Users/MR. CAPH/PycharmProjects/blogBiranda/blog.db")
         cursor = db.cursor()
-        cursor.execute("SELECT fotolar FROM ulkeler WHERE rowid = ?", (country_id,))
+        cursor.execute("SELECT images FROM Countries WHERE by_order = ?", (country_id,))
         photo_blob = cursor.fetchone()[0]
         if photo_blob:
             return Response(photo_blob, mimetype='image/jpeg')
