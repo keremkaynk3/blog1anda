@@ -94,6 +94,15 @@
             background-color: #f1f3f5;
             border-radius: 5px;
         }
+        .project-item a {
+        text-decoration: none; /* Alt çizgiyi kaldırır */
+        color: #333; /* Yazı rengini değiştirir */
+        font-weight: bold; /* Yazıyı kalın yapar */
+        }
+        .project-item a:hover {
+        color: #007bff; /* Üzerine gelince yazı rengini değiştirir */
+        text-decoration: underline; /* Üzerine gelince alt çizgiyi geri getirir */
+    }
     </style>
 </head>
 <body>
@@ -125,15 +134,22 @@
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="section">
-                <h2 class="section-title">Projects</h2>
-                <!-- Project list goes here -->
-                <div class="project-item">Blog1Anda</div>
-                <div class="project-item">TwelveB</div>
-                <div class="project-item">IMDB1000</div>
-            </div>
+      <div class="col-md-4">
+    <div class="section">
+        <h2 class="section-title">Projects</h2>
+        <!-- Project list with links -->
+        <div class="project-item">
+            <a href="https://github.com/keremkaynak3/blog1anda" target="_blank">Blog1Anda</a>
         </div>
+        <div class="project-item">
+            <a href="https://github.com/keremkaynak3/TwelveB" target="_blank">TwelveB</a>
+        </div>
+        <div class="project-item">
+            <a href="https://github.com/keremkaynak3/IMDB1000" target="_blank">IMDB1000</a>
+        </div>
+    </div>
+</div>
+
         <div class="col-md-4">
             <div class="section">
                 <h2 class="section-title">Internships</h2>

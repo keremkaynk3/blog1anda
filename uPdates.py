@@ -19,11 +19,11 @@ class uPdates():
         print("Enter that informations carefully about country that you want to add")
         a = input("Country Name:")
         b = input("Video Link (If not exist press 'ENTER' :")
-        c = input("Başkenti:")
-        d = input("Ülke Kodu")
-        e = input("Ülke Nüfusu")
-        f = input("Para Birimi:")
-        g = input("Şehir Bilgisi:")
+        c = input("Capital City:")
+        d = input("Country Code:")
+        e = input("Population:")
+        f = input("Currency:")
+        g = input("Cities you have ever been:")
         h = 0
         sorgu = "INSERT INTO Countries(country_name, links, capital, country_code, population, currency, cities, images) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
         cursor.execute(sorgu, (a, b, c, d, e, f, g, h))
