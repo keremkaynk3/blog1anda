@@ -125,38 +125,36 @@
         <div class="col-md-4">
             <div class="section">
                 <h2 class="section-title">Education</h2>
-                <!-- School information goes here -->
-                <div class="project-item">Manisa Celal Bayar University Computer Engineering(4th Grade)</div>
-                <div class="project-item">Akademia Mazowiecka w Płocku Erasmus+ Experience (3.90/4.00)</div>
-                <div class="project-item">Manisa Celal Bayar University PREP Graduated (90/100)</div>
-                <div class="project-item">Kucukcekmece Anadolu Lisesi Graduated (83,65/100)</div>
-
+                <!-- Education bilgilerini veritabanından çek -->
+                {% for edu in education %}
+                <div class="project-item">{{ edu[0] }} - {{ edu[1] }}<br>{{ edu[2] }} ({{ edu[3] }})</div>
+                {% endfor %}
             </div>
         </div>
 
-      <div class="col-md-4">
-    <div class="section">
-        <h2 class="section-title">Projects</h2>
-        <!-- Project list with links -->
-        <div class="project-item">
-            <a href="https://github.com/keremkaynak3/blog1anda" target="_blank">Blog1Anda</a>
+        <div class="col-md-4">
+            <div class="section">
+                <h2 class="section-title">Projects</h2>
+                <!-- Projeler aynı kalabilir -->
+                <div class="project-item">
+                    <a href="https://github.com/keremkaynak3/blog1anda" target="_blank">Blog1Anda</a>
+                </div>
+                <div class="project-item">
+                    <a href="https://github.com/keremkaynak3/TwelveB" target="_blank">TwelveB</a>
+                </div>
+                <div class="project-item">
+                    <a href="https://github.com/keremkaynak3/IMDB1000" target="_blank">IMDB1000</a>
+                </div>
+            </div>
         </div>
-        <div class="project-item">
-            <a href="https://github.com/keremkaynak3/TwelveB" target="_blank">TwelveB</a>
-        </div>
-        <div class="project-item">
-            <a href="https://github.com/keremkaynak3/IMDB1000" target="_blank">IMDB1000</a>
-        </div>
-    </div>
-</div>
 
         <div class="col-md-4">
             <div class="section">
                 <h2 class="section-title">Internships</h2>
-                <!-- Internship information goes here -->
-                <div class="internship-item">Faber A Franke - IT Intern (Current)</div>
-                <div class="internship-item">Ozler Plastic - SAP Intern (2 months)</div>
-                <div class="internship-item">Ozler Plastic - IT Intern (2 months)</div>
+                <!-- Internships bilgilerini veritabanından çek -->
+                {% for intern in internships %}
+                <div class="internship-item">{{ intern[0] }} - {{ intern[1] }}<br>{{ intern[2] }} to {{ intern[3] }} ({{ intern[4] }})</div>
+                {% endfor %}
             </div>
         </div>
     </div>

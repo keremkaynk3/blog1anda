@@ -26,9 +26,39 @@ def index():
 def about_me():
     return render_template('about.html')
 
+def get_education():
+    try:
+        db = sql.connect(r"C:/Users/MR. CAPH/PycharmProjects/blogBiranda/blog.db")
+        cursor = db.cursor()
+        cursor.execute("SELECT institution_name, grade, extra_inf, gpa FROM Education")
+        education = cursor.fetchall()
+    except sql.Error as e:
+        print(f"Database Error: {e}")
+        education = []
+    finally:
+        if db:
+            db.close()
+    return education
+
+def get_internships():
+    try:
+        db = sql.connect(r"C:/Users/MR. CAPH/PycharmProjects/blogBiranda/blog.db")
+        cursor = db.cursor()
+        cursor.execute("SELECT company_name, position, start_date, end_date, location FROM Internships")
+        internships = cursor.fetchall()
+    except sql.Error as e:
+        print(f"Database Error: {e}")
+        internships = []
+    finally:
+        if db:
+            db.close()
+    return internships
+
 @app.route('/ptfy')
 def portfolio():
-    return render_template('portfolio.html')
+    education = get_education()
+    internships = get_internships()
+    return render_template('portfolio.html', education=education, internships=internships)
 
 @app.route('/visited')
 def visited():
