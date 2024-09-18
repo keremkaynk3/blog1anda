@@ -11,20 +11,29 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            background-color: #f8f9fa;
+            background-color: #ffffff; /* Beyaz arka plan */
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            position: relative;
         }
         .navbar {
-            background-color: #f8f9fa;
+            background-color: #ffffff;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
         }
         .navbar-brand {
             display: flex;
             align-items: center;
             font-size: 2.5rem;
             font-weight: bold;
-            color: #333; /* Default color */
+            color: #333; /* Varsayılan renk */
         }
         .navbar-brand img {
             width: 50px;
@@ -37,37 +46,37 @@
             -webkit-background-clip: text;
             color: transparent;
         }
-        .container {
-            flex-grow: 1;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 20px;
+        .navbar-toggler {
+            display: none; /* Mobil görünümde aktif olacak */
         }
         .section {
-            width: 28%;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            background-color: #fff;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            /* Ensure sections have the same width */
-            flex: 1; /* Ensure equal width */
-            margin: 10px; /* Add margin to keep space between sections */
+            scroll-snap-align: start;
         }
-        .section:hover {
-            transform: scale(1.1);
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        #about {
+            background-color: rgba(255, 255, 255, 0.9); /* Hafif şeffaf beyaz */
+        }
+        #portfolio {
+            background-color: rgba(255, 255, 255, 0.9); /* Hafif şeffaf beyaz */
+        }
+        #visited {
+            background-color: rgba(255, 255, 255, 0.9); /* Hafif şeffaf beyaz */
         }
         .section h2 {
             margin-bottom: 20px;
             color: #008000;
-            font-size: 1.75rem;
+            font-size: 3rem;
         }
         .section p {
-            font-size: 1rem;
+            font-size: 1.5rem;
             color: #333;
+            max-width: 800px;
         }
         .section a {
             display: inline-block;
@@ -83,82 +92,121 @@
         .section a:hover {
             background-color: #0056b3;
         }
+        /* Logo arka planda silik */
+        .background-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            opacity: 0.7; /* Silik görünüm için opaklık */
+            width: 80%; /* İsteğe bağlı olarak boyutu ayarlayın */
+            height: auto;
+        }
+        /* Sağ alt ikonlar */
+        .navbar-icons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .navbar-icons .nav-link {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .navbar-icons img {
+            width: 20px;
+            height: 20px;
+        }
+        /* Dropdown menü için stiller */
+        .dropdown-menu {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px; /* Köşeleri yuvarlak */
+            box-shadow: 0 4px 8px rgba(50, 0, 0, 0.2); /* Gölge efekti */
+            min-width: 150px;
+            transform: translateX(-100px); /* Sol tarafa kaydırma */
+            margin-top: 5px; /* Menü üstü boşluk */
+        }
+        .dropdown-item {
+            color: #000000;
+            padding: 10px 15px;
+            border-radius: 4px; /* Köşeleri yuvarlak */
+        }
+        .dropdown-item:hover {
+            background-color: #267392;
+        }
     </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">
-            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
-            <h1>Blog1anda</h1>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="https://github.com/keremkaynak3">
-                <img src="..\static\github.jpeg" alt="Github" style="width: 20px; height: 20px;">
-                Github
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="https://www.linkedin.com/in/keremkaynak3/">
-                <img src="..\static\linked.png" alt="LinkedIn" style="width: 20px; height: 20px;">
-                LinkedIn
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="https://www.instagram.com/keremkaynak3/">
-                <img src="..\static\instagram.webp" alt="Instagram" style="width: 20px; height: 20px;">
-                Instagram
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="https://www.youtube.com/@keremkaynak3">
-                <img src="..\static\youtube.png" alt="YouTube" style="width: 20px; height: 20px;">
-                YouTube
-            </a>
-        </li>
-    </ul>
-</div>
+<!-- Sabit Arka Plan Logo -->
+<img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="background-logo">
 
+<!-- Navbar -->
+<nav class="navbar">
+    <a class="navbar-brand" href="">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+        <h1>Blog1anda</h1>
+    </a>
+    <!-- More options dropdown -->
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            &#9776;
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="#about">About Me</a></li>
+            <li><a class="dropdown-item" href="#portfolio">Portfolio</a></li>
+            <li><a class="dropdown-item" href="#visited">Visited</a></li>
+        </ul>
     </div>
 </nav>
 
-<!-- Main Content -->
-<div class="container">
-    <div id="about" class="section">
-        <h2>About Me</h2>
-        <p>You can explore my personal attributes, delve into the experiences I've gathered throughout my academic journey.
-            Here, you'll even find some of my favorite quotes that resonate deeply with me.
-        </p>
-        <a href="about">More Information</a>
+<!-- Sağ Alt İkonlar -->
+<div class="navbar-icons">
+    <a class="nav-link" href="https://github.com/keremkaynak3">
+        <img src="../static/github.jpeg" alt="Github">
+    </a>
+    <a class="nav-link" href="https://www.linkedin.com/in/keremkaynak3/">
+        <img src="../static/linked.png" alt="LinkedIn">
+    </a>
+    <a class="nav-link" href="https://www.instagram.com/keremkaynak3/">
+        <img src="../static/instagram.webp" alt="Instagram">
+    </a>
+    <a class="nav-link" href="https://www.youtube.com/@keremkaynak3">
+        <img src="../static/youtube.png" alt="YouTube">
+    </a>
+</div>
 
-    </div>
-    <div id="portfolio" class="section">
-        <h2>Portfolio</h2>
-        <p>
-            Take a look at my portfolio where I showcase my skills, past projects, and achievements.
-            This section will give you a glimpse into the work I am most proud of.
-        </p>
-        <br>
-        <a href="ptfy">View My Portfolio</a>
-        <br>
-    </div>
-    <div id="visited" class="section">
-        <h2>Visited</h2>
-        <p>I managed to visit 12 cities across 4 different countries.
-            This experience has helped me to improve my communication skills
-            Click below to view the detailed list of places.</p>
-        <a href="visited">View Visited Countries</a>
-    </div>
+<!-- Ana İçerik -->
+<div class="section" id="about">
+    <h2>ABOUT ME</h2>
+    <p>You can explore my personal attributes, delve into the experiences I've gathered throughout my academic journey.
+        Here, you'll even find some of my favorite quotes that resonate deeply with me.
+    </p>
+    <a href="about">More Information</a>
+</div>
+<div class="section" id="portfolio">
+    <h2>PORTFOLIO</h2>
+    <p>
+        Take a look at my portfolio where I showcase my skills, past projects, and achievements.
+        This section will give you a glimpse into the work I am most proud of.
+    </p>
+    <a href="ptfy">View My Portfolio</a>
+</div>
+<div class="section" id="visited">
+    <h2>VISITED</h2>
+    <p>I managed to visit 12 cities across 4 different countries.
+        This experience has helped me to improve my communication skills
+        Click below to view the detailed list of places.</p>
+    <a href="visited">View Visited Countries</a>
 </div>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 </html>
