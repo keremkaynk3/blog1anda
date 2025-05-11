@@ -10,17 +10,15 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            scroll-snap-type: y mandatory;
-            overflow-y: scroll;
-            position: relative;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
         }
         html {
             scroll-behavior: smooth;
         }
         .navbar {
-            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.95);
             position: fixed;
             width: 100%;
             top: 0;
@@ -30,6 +28,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         .navbar-brand {
             display: flex;
@@ -49,39 +48,88 @@
             -webkit-background-clip: text;
             color: transparent;
         }
-
-        .section {
-            height: 100vh;
+        .navbar-icons {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            z-index: 3000;
+        }
+        .navbar-icons .nav-link {
+            margin: 8px 0;
+        }
+        .navbar-icons img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            transition: transform 0.2s;
+        }
+        .navbar-icons img:hover {
+            transform: scale(1.15);
+        }
+        .hero {
+            height: 100vh;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #222;
             text-align: center;
-            padding: 20px;
-            scroll-snap-align: start;
-            opacity: 0; /* Başlangıçta görünmez */
-            transition: opacity 1s ease; /* Opaklık geçişi */
+            padding: 0 20px;
+            position: relative;
         }
-        .section.visible {
-            opacity: 1; /* Görünür hale geldiğinde */
+        .hero-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 7vw;
+            color: #000;
+            opacity: 0.07;
+            font-weight: 900;
+            white-space: nowrap;
+            pointer-events: none;
+            user-select: none;
+            z-index: 1;
         }
-        #about, #portfolio, #visited {
-            background-color: rgba(255, 255, 255, 0.9);
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+        }
+        .section {
+            padding: 80px 20px;
+            text-align: center;
+            background-color: #fff;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         .section h2 {
             margin-bottom: 20px;
             color: #008000;
-            font-size: 3rem;
+            font-size: 2.5rem;
         }
         .section p {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: #333;
             max-width: 800px;
+            margin: 0 auto;
         }
         .section a {
             display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
+            margin-top: 20px;
+            padding: 12px 24px;
             color: #fff;
             background-color: #007bff;
             text-decoration: none;
@@ -93,68 +141,92 @@
             background-color: #0056b3;
         }
         .background-logo {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: -1;
-            opacity: 0.7;
-            width: 80%;
-            height: auto;
+            display: none;
         }
-        .navbar-icons {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .custom-dropdown {
+            position: relative;
+            display: inline-block;
         }
-        .navbar-icons .nav-link {
+        .custom-dropdown-toggle {
+            background: linear-gradient(135deg, #007bff 60%, #00c6ff 100%);
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            transition: box-shadow 0.2s, transform 0.2s;
+            cursor: pointer;
+            outline: none;
+            position: relative;
         }
-        .navbar-icons img {
-            width: 20px;
-            height: 20px;
+        .custom-dropdown-toggle:hover, .custom-dropdown-toggle:focus {
+            box-shadow: 0 8px 24px rgba(0,123,255,0.25);
+            transform: translateY(-2px) scale(1.05);
+        }
+        .custom-dropdown-toggle svg {
+            width: 28px;
+            height: 28px;
+            fill: #fff;
+        }
+        .custom-dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 56px;
+            min-width: 180px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            padding: 10px 0;
+            z-index: 2000;
+            animation: fadeIn 0.25s;
+        }
+        .custom-dropdown-menu.show {
+            display: block;
+        }
+        .custom-dropdown-menu a {
+            display: block;
+            padding: 12px 24px;
+            color: #333;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: background 0.18s, color 0.18s;
+        }
+        .custom-dropdown-menu a:hover {
+            background: linear-gradient(90deg, #007bff22 0%, #00c6ff22 100%);
+            color: #007bff;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-
-<img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="background-logo">
 
 <nav class="navbar">
     <a class="navbar-brand" href="">
         <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
         <h1>Blog1anda</h1>
     </a>
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            &#9776;
+    <div class="custom-dropdown">
+        <button class="custom-dropdown-toggle" id="customDropdownBtn" aria-expanded="false">
+            <svg viewBox="0 0 32 32"><rect y="7" width="32" height="4" rx="2"/><rect y="14" width="32" height="4" rx="2"/><rect y="21" width="32" height="4" rx="2"/></svg>
         </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <li><a class="dropdown-item" href="#about">About Me</a></li>
-            <li><a class="dropdown-item" href="#portfolio">Portfolio</a></li>
-            <li><a class="dropdown-item" href="#visited">Visited</a></li>
-        </ul>
+        <div class="custom-dropdown-menu" id="customDropdownMenu">
+            <a href="#about">About Me</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#visited">Visited</a>
+        </div>
     </div>
 </nav>
 
-<div class="navbar-icons">
-    <a class="nav-link" href="https://github.com/keremkaynak3">
-        <img src="../static/github.jpeg" alt="Github">
-    </a>
-    <a class="nav-link" href="https://www.linkedin.com/in/keremkaynak3/">
-        <img src="../static/linked.png" alt="LinkedIn">
-    </a>
-    <a class="nav-link" href="https://www.instagram.com/keremkaynak3/">
-        <img src="../static/instagram.webp" alt="Instagram">
-    </a>
-    <a class="nav-link" href="https://www.youtube.com/@keremkaynak3">
-        <img src="../static/youtube.png" alt="YouTube">
-    </a>
+<div class="hero">
+    <div class="hero-watermark">Welcome to Blog1anda</div>
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" style="position: relative; z-index: 2; width: 1500px; max-width: 50vw; height: auto; margin-bottom: 16px; display: block; margin-left: auto; margin-right: auto;">
 </div>
 
 <div class="section" id="about">
@@ -199,7 +271,36 @@
     }
 
     window.addEventListener('scroll', handleScroll);
+
+    // Custom dropdown logic
+    const customDropdownBtn = document.getElementById('customDropdownBtn');
+    const customDropdownMenu = document.getElementById('customDropdownMenu');
+    document.addEventListener('click', function(event) {
+        if (customDropdownBtn.contains(event.target)) {
+            const expanded = customDropdownBtn.getAttribute('aria-expanded') === 'true';
+            customDropdownBtn.setAttribute('aria-expanded', !expanded);
+            customDropdownMenu.classList.toggle('show');
+        } else if (!customDropdownMenu.contains(event.target)) {
+            customDropdownMenu.classList.remove('show');
+            customDropdownBtn.setAttribute('aria-expanded', 'false');
+        }
+    });
 </script>
+
+<div class="navbar-icons">
+    <a class="nav-link" href="https://github.com/keremkaynak3" target="_blank">
+        <img src="../static/github.jpeg" alt="Github">
+    </a>
+    <a class="nav-link" href="https://www.linkedin.com/in/keremkaynak3/" target="_blank">
+        <img src="../static/linked.png" alt="LinkedIn">
+    </a>
+    <a class="nav-link" href="https://www.instagram.com/keremkaynak3/" target="_blank">
+        <img src="../static/instagram.webp" alt="Instagram">
+    </a>
+    <a class="nav-link" href="https://www.youtube.com/@keremkaynak3" target="_blank">
+        <img src="../static/youtube.png" alt="YouTube">
+    </a>
+</div>
 
 </body>
 </html>

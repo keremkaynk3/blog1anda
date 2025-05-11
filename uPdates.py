@@ -1,7 +1,7 @@
 import sqlite3 as sql
 
 # SQLite veritabanı bağlantısı
-db = sql.connect(r"C:/Users/MR. CAPH/PycharmProjects/blogBiranda/blog.db")
+db = sql.connect(r"C:/Users/MR. CAPH/Projects/blogBiranda/blog.db")
 cursor = db.cursor()
 
 # Fotoğraf verisi

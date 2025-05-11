@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 def get_countries():
     try:
-        db = sql.connect(r"C:/Users/MR. CAPH/PycharmProjects/blogBiranda/blog.db")
+        db = sql.connect(r"C:/Users/MR. CAPH/Projects/blogBiranda/blog.db")
         cursor = db.cursor()
         cursor.execute("SELECT country_name, links, capital, country_code, population, currency, cities, images FROM Countries")
         countries = cursor.fetchall()
@@ -28,7 +28,7 @@ def about_me():
 
 def get_education():
     try:
-        db = sql.connect(r"C:/Users/MR. CAPH/PycharmProjects/blogBiranda/blog.db")
+        db = sql.connect(r"C:/Users/MR. CAPH/Projects/blogBiranda/blog.db")
         cursor = db.cursor()
         cursor.execute("SELECT institution_name, grade, extra_inf, gpa FROM Education")
         education = cursor.fetchall()
@@ -42,9 +42,9 @@ def get_education():
 
 def get_internships():
     try:
-        db = sql.connect(r"C:/Users/MR. CAPH/PycharmProjects/blogBiranda/blog.db")
+        db = sql.connect(r"C:/Users/MR. CAPH/Projects/blogBiranda/blog.db")
         cursor = db.cursor()
-        cursor.execute("SELECT company_name, position, start_date, end_date, location FROM Internships")
+        cursor.execute("SELECT company_name, position, start_date, end_date, location FROM Internships ORDER BY end_date DESC")
         internships = cursor.fetchall()
     except sql.Error as e:
         print(f"Database Error: {e}")
@@ -76,7 +76,7 @@ def country(country_id):
 @app.route('/image/<int:country_id>')
 def image(country_id):
     try:
-        db = sql.connect(r"C:/Users/MR. CAPH/PycharmProjects/blogBiranda/blog.db")
+        db = sql.connect(r"C:/Users/MR. CAPH/Projects/blogBiranda/blog.db")
         cursor = db.cursor()
         cursor.execute("SELECT images FROM Countries WHERE by_order = ?", (country_id,))
         photo_blob = cursor.fetchone()[0]
